@@ -17,19 +17,6 @@ public class ArticleController : ControllerBase
     public async Task<List<Article>> Get() =>
         await _articleService.GetAsync();
 
-    [HttpGet("{id:length(24)}")]
-    public async Task<ActionResult<Article>> Get(string id)
-    {
-        var book = await _articleService.GetAsync(id);
-
-        if (book is null)
-        {
-            return NotFound();
-        }
-
-        return book;
-    }
-
     [HttpPost]
     public async Task<IActionResult> Post(Article newArticle)
     {
