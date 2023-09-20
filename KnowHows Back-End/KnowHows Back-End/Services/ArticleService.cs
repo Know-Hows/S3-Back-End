@@ -1,10 +1,11 @@
-﻿using KnowHows_Back_End.Models;
+﻿using KnowHows_Back_End.Interfaces;
+using KnowHows_Back_End.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace KnowHows_Back_End.Services;
 
-public class ArticleService
+public class ArticleService : IArticleService
 {
     private readonly IMongoCollection<Article> _articlesCollection;
 
@@ -21,9 +22,9 @@ public class ArticleService
             knowHowsDatabaseSettings.Value.ArticleCollectionName);
     }
 
-    public async Task<List<Article>> GetAsync() =>
+    public async Task<List<Article>> GetArticlesAsync() =>
         await _articlesCollection.Find(_ => true).ToListAsync();
 
-    public async Task CreateAsync(Article newPost) =>
+    public async Task CreateArticleAsync(Article newPost) =>
         await _articlesCollection.InsertOneAsync(newPost);
 }

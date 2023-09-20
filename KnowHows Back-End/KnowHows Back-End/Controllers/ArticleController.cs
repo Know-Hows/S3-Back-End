@@ -1,4 +1,5 @@
-﻿using KnowHows_Back_End.Models;
+﻿using KnowHows_Back_End.Interfaces;
+using KnowHows_Back_End.Models;
 using KnowHows_Back_End.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,19 +9,27 @@ namespace KnowHows_Back_End.Controllers;
 [Route("api/[controller]")]
 public class ArticleController : ControllerBase
 {
-    private readonly ArticleService _articleService;
+    private readonly IArticleService _iArticleService;
 
-    public ArticleController(ArticleService articlesService) =>
-        _articleService = articlesService;
+    public ArticleController(IArticleService iArticlesService) =>
+        _iArticleService = iArticlesService;
 
     [HttpGet]
-    public async Task<List<Article>> Get() =>
-        await _articleService.GetAsync();
+    public async Task<ActionResult<List<Article>>> Get()
+    {
+        var articles = await _iArticleService.GetArticlesAsync();
+
+        return articles != null ? Ok(articles) : NotFound();
+    }
 
     [HttpPost]
-    public async Task<IActionResult> Post(Article newArticle)
+    public async Task<ActionResult> Post(Article newArticle)
     {
-        await _articleService.CreateAsync(newArticle);
+        if (!ModelState.IsValid || newArticle.Title == null)
+        {
+            return BadRequest();
+        }
+        await _iArticleService.CreateArticleAsync(newArticle);
 
         return CreatedAtAction(nameof(Get), new { id = newArticle.Id }, newArticle);
     }
