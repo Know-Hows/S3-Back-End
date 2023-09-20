@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<KnowHowsDatabaseSettings>(
     builder.Configuration.GetSection("KnowHowsDB"));
 
-builder.Services.AddSingleton<ArticlesService>();
+builder.Services.AddSingleton<ArticleService>();
 
 builder.Services.AddControllers();
 

@@ -8,9 +8,9 @@ namespace KnowHows_Back_End.Controllers;
 [Route("api/[controller]")]
 public class ArticleController : ControllerBase
 {
-    private readonly ArticlesService _articleService;
+    private readonly ArticleService _articleService;
 
-    public ArticleController(ArticlesService articlesService) =>
+    public ArticleController(ArticleService articlesService) =>
         _articleService = articlesService;
 
     [HttpGet]
