@@ -1,18 +1,19 @@
 name: .NET
 
 on:
+  push:
+    branches: 
+      - main
+      - Dev
   pull_request:
     branches: 
       - main
       - Dev
 
-jobs:  
+jobs:
   buildDotNet:
 
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
