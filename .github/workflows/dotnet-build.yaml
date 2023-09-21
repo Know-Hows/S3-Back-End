@@ -88,10 +88,10 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t "knowhows-backend:latest" .
-          docker tag "knowhows-backend:latest" "knowhows-backend:${{ github.sha }}"
-          docker push "knowhows-backend:latest"
-          docker push "knowhows-backend:${{ github.sha }}"
+          docker build -t "${{ secrets.DOCKER_USERNAME }}/knowhows-backend:latest" .
+          docker tag "${{ secrets.DOCKER_USERNAME }}/knowhows-backend:latest" "${{ secrets.DOCKER_USERNAME }}/knowhows-backend:${{ github.sha }}"
+          docker push "${{ secrets.DOCKER_USERNAME }}/knowhows-backend:latest"
+          docker push "${{ secrets.DOCKER_USERNAME }}/knowhows-backend:${{ github.sha }}"
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
