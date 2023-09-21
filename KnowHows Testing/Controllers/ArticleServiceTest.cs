@@ -30,10 +30,10 @@ namespace KnowHows_Testing.Controllers
         {
             // Arrange
             var articleMock = _fixture.Create<List<Article>>();
-            _serviceMock.Setup(x => x.GetArticlesAsync()).Returns(async () => articleMock);
+            _serviceMock.Setup(x => x.GetArticlesAsync()).Returns(() => Task.FromResult(articleMock));
 
             // Act
-            var result = await _sut.Get().ConfigureAwait(false);
+            var result = await _sut.Get();
 
             // Assert
             Assert.NotNull(result);
@@ -52,10 +52,10 @@ namespace KnowHows_Testing.Controllers
         {
             //Arrange
             List<Article> response = null;
-            _serviceMock.Setup(x => x.GetArticlesAsync()).Returns(async () => response);
+            _serviceMock.Setup(x => x.GetArticlesAsync()).Returns(() => Task.FromResult(response));
 
             //Act
-            var result = await _sut.Get().ConfigureAwait(false);
+            var result = await _sut.Get();
 
             //Assert
             Assert.NotNull(result);
@@ -69,10 +69,10 @@ namespace KnowHows_Testing.Controllers
         {
             //Arrange
             var articleMock = _fixture.Create<Article>();
-            _serviceMock.Setup(x => x.CreateArticleAsync(articleMock)).Returns(async () => articleMock);
+            _serviceMock.Setup(x => x.CreateArticleAsync(articleMock)).Returns(() => Task.FromResult(articleMock));
 
             //Act
-            var result = await _sut.Post(articleMock).ConfigureAwait(false);
+            var result = await _sut.Post(articleMock);
 
             //Assert
             Assert.NotNull(result);
@@ -86,10 +86,10 @@ namespace KnowHows_Testing.Controllers
             //Arrange
             var articleMock = _fixture.Create<Article>();
             articleMock.Title = null;
-            _serviceMock.Setup(x => x.CreateArticleAsync(articleMock)).Returns(async () => articleMock);
+            _serviceMock.Setup(x => x.CreateArticleAsync(articleMock)).Returns(() => Task.FromResult(articleMock));
 
             //Act
-            var result = await _sut.Post(articleMock).ConfigureAwait(false);
+            var result = await _sut.Post(articleMock);
 
             //Assert
             Assert.NotNull(articleMock);
