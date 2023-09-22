@@ -1,4 +1,4 @@
-name: .NET
+name: .NET build and test
 
 on:
   push:
@@ -13,7 +13,10 @@ on:
 jobs:
   buildDotNet:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
     - uses: actions/checkout@v3
