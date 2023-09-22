@@ -7,6 +7,7 @@ namespace KnowHows_Back_End.Models
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string? Id { get; set; }
-        public string Title { get; set; } = string.Empty;
+        public string Title { get; set; } = null!;
+        public string Body { get; set; } = null!;
     }
 }
