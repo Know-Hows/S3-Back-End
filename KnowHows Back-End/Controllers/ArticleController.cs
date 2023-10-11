@@ -25,7 +25,7 @@ public class ArticleController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> Post(Article newArticle)
     {
-        if (!ModelState.IsValid || newArticle.Title == null)
+        if (!ModelState.IsValid || newArticle.Title == null || newArticle.Body == null)
         {
             return BadRequest();
         }
