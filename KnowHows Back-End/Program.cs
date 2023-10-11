@@ -20,6 +20,16 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IArticleService, ArticleService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,11 +39,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(x => x
-                .WithOrigins()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
+app.UseCors();
 
 app.UseHttpsRedirection();
 
