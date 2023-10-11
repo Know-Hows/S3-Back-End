@@ -81,7 +81,7 @@ namespace KnowHows_Testing.Controllers
         }
 
         [Fact]
-        public async Task CreateArticleAsync_ShouldReturnBadRequest_WhenInvalidData()
+        public async Task CreateArticleAsync_ShouldReturnBadRequest_WhenInvalidTitleData()
         {
             //Arrange
             var articleMock = _fixture.Create<Article>();
@@ -92,7 +92,24 @@ namespace KnowHows_Testing.Controllers
             var result = await _sut.Post(articleMock);
 
             //Assert
-            Assert.NotNull(articleMock);
+            Assert.NotNull(result);
+            result.Should().NotBeNull();
+            result.Should().BeAssignableTo<BadRequestResult>();
+        }
+
+        [Fact]
+        public async Task CreateArticleAsync_ShouldReturnBadRequest_WhenInvalidBodyData()
+        {
+            //Arrange
+            var articleMock = _fixture.Create<Article>();
+            articleMock.Body = null;
+            _serviceMock.Setup(x => x.CreateArticleAsync(articleMock)).Returns(() => Task.FromResult(articleMock));
+
+            //Act
+            var result = await _sut.Post(articleMock);
+
+            //Assert
+            Assert.NotNull(result);
             result.Should().NotBeNull();
             result.Should().BeAssignableTo<BadRequestResult>();
         }
