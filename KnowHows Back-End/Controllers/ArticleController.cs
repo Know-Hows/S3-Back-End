@@ -1,10 +1,12 @@
 ﻿using KnowHows_Back_End.Interfaces;
 using KnowHows_Back_End.Models;
 using KnowHows_Back_End.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KnowHows_Back_End.Controllers;
 
+[EnableCors("AllowCors")]
 [ApiController]
 [Route("api/[controller]")]
 public class ArticleController : ControllerBase
