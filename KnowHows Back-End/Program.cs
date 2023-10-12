@@ -20,28 +20,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IArticleService, ArticleService>();
 
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(
-        builder =>
-        {
-            builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-        });
-});
-builder.Services.AddCors(
-    options =>
-    {
-        options.AddPolicy(
-            "AllowCors",
-            builder =>
-            {
-                builder.AllowAnyOrigin().WithMethods(
-                    HttpMethod.Get.Method,
-                    HttpMethod.Put.Method,
-                    HttpMethod.Post.Method,
-                    HttpMethod.Delete.Method).AllowAnyHeader();
-            });
-    });
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -52,8 +31,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors();
-app.UseCors("AllowCors");
+app.UseCors(x => x
+                .WithOrigins("http://localhost:3000", "http://localhost:3001", "http://knowhows.com")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
 
 //app.UseHttpsRedirection();
 
