@@ -18,6 +18,7 @@ public class ArticleController : ControllerBase
     public async Task<ActionResult<List<Article>>> Get()
     {
         var articles = await _iArticleService.GetArticlesAsync();
+        Response.Headers.Add("Acces-Control-Allow-Origin", "*");
 
         return articles != null ? Ok(articles) : NotFound();
     }
@@ -30,6 +31,8 @@ public class ArticleController : ControllerBase
             return BadRequest();
         }
         await _iArticleService.CreateArticleAsync(newArticle);
+
+        Response.Headers.Add("Acces-Control-Allow-Origin", "*");
 
         return CreatedAtAction(nameof(Get), new { id = newArticle.Id }, newArticle);
     }
