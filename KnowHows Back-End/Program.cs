@@ -22,13 +22,10 @@ builder.Services.AddScoped<IArticleService, ArticleService>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
+    options.AddDefaultPolicy(
         builder =>
         {
-            builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
+            builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost").AllowAnyHeader().AllowAnyMethod();
         });
 });
 
@@ -41,11 +38,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod());
-app.UseCors("AllowAll");
+app.UseCors();
 
 //app.UseHttpsRedirection();
 
