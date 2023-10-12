@@ -22,12 +22,14 @@ builder.Services.AddScoped<IArticleService, ArticleService>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
 });
 
 var app = builder.Build();
@@ -41,13 +43,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors(x => x
                 .AllowAnyOrigin()
-                .AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowCredentials());
+                .AllowAnyMethod());
+app.UseCors("AllowAll");
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllers();
 
