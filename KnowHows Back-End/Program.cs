@@ -32,7 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(x => x
-                .WithOrigins("http://localhost:3000", "http://localhost:3001", "http://knowhows.com", "http://localhost:*", "https://localhost:*", "http://*:3000")
+                .WithOrigins("*")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
