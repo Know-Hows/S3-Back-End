@@ -32,7 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(x => x
-                .WithOrigins("*")
+                .WithOrigins("http://localhost:30000", "http://front-end-clusterip-srv:3000")
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
