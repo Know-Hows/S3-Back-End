@@ -25,6 +25,12 @@ public class ArticleService : IArticleService
     public async Task<List<Article>> GetArticlesAsync() =>
         await _articlesCollection.Find(_ => true).ToListAsync();
 
+    public async Task<Article?> GetArticleAsync(string id) =>
+            await _articlesCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+
     public async Task CreateArticleAsync(Article newPost) =>
         await _articlesCollection.InsertOneAsync(newPost);
+
+    public async Task UpdateArticleAsync(string id, Article updatedArticle) =>
+            await _articlesCollection.ReplaceOneAsync(x => x.Id == id, updatedArticle);
 }

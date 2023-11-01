@@ -33,4 +33,20 @@ public class ArticleController : ControllerBase
 
         return CreatedAtAction(nameof(Get), new { id = newArticle.Id }, newArticle);
     }
+
+    [HttpPut("updateLikes/{id:length(24)}")]
+    public async Task<ActionResult> UpdateLikesScore(string id, bool likeCredit)
+    {
+        if (id is null) return BadRequest();
+
+        var article = await _iArticleService.GetArticleAsync(id);
+
+        if (article == null) return NotFound();
+
+        if (likeCredit == true) article.LikesScore++;
+        else article.LikesScore--;
+
+        await _iArticleService.UpdateArticleAsync(id, article);
+        return Ok();
+    }
 }

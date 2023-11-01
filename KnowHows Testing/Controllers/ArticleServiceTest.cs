@@ -25,6 +25,7 @@ namespace KnowHows_Testing.Controllers
             _sut = new ArticleController(_serviceMock.Object);//creates the implementation in memory
         }
 
+        //Get all tests
         [Fact]
         public async Task GetArticlesAsync_ShouldReturnOkResponse_WhenDataFound()
         {
@@ -64,6 +65,7 @@ namespace KnowHows_Testing.Controllers
             _serviceMock.Verify(x => x.GetArticlesAsync(), Times.Once());
         }
 
+        //Post tests
         [Fact]
         public async Task CreateArticleAsync_ShouldReturnOkResponse_WhenCreatedSuccesfully()
         {
@@ -112,6 +114,74 @@ namespace KnowHows_Testing.Controllers
             Assert.NotNull(result);
             result.Should().NotBeNull();
             result.Should().BeAssignableTo<BadRequestResult>();
+        }
+
+        //Update Tests
+        [Fact]
+        public async Task UpdateArticleAsyncLikesScore_ShouldReturnOk_WhenSuccesfullUpdatedAddedLikes()
+        {
+            //Arrange
+            var updatedArticlesMock = _fixture.Create<Article>();
+            _serviceMock.Setup(x => x.GetArticleAsync(updatedArticlesMock.Id)).Returns(() => Task.FromResult(updatedArticlesMock));
+            _serviceMock.Setup(x => x.UpdateArticleAsync(updatedArticlesMock.Id, updatedArticlesMock)).Returns(() => Task.FromResult(updatedArticlesMock));
+
+            //Act
+            var result = await _sut.UpdateLikesScore(updatedArticlesMock.Id, true).ConfigureAwait(false);
+
+            //Assert
+            Assert.NotNull(result);
+            result.Should().NotBeNull();
+            result.Should().BeAssignableTo<OkResult>();
+        }
+
+        [Fact]
+        public async Task UpdateArticleAsyncLikesScore_ShouldReturnOk_WhenSuccesfullUpdatedSubstractedLikes()
+        {
+            //Arrange
+            var updatedArticlesMock = _fixture.Create<Article>();
+            _serviceMock.Setup(x => x.GetArticleAsync(updatedArticlesMock.Id)).Returns(() => Task.FromResult(updatedArticlesMock));
+            _serviceMock.Setup(x => x.UpdateArticleAsync(updatedArticlesMock.Id, updatedArticlesMock)).Returns(() => Task.FromResult(updatedArticlesMock));
+
+            //Act
+            var result = await _sut.UpdateLikesScore(updatedArticlesMock.Id, false).ConfigureAwait(false);
+
+            //Assert
+            Assert.NotNull(result);
+            result.Should().NotBeNull();
+            result.Should().BeAssignableTo<OkResult>();
+        }
+
+        [Fact]
+        public async Task UpdateArticleAsyncLikesScore_ShouldReturnBadRequest_WhenNoValidDataGiven()
+        {
+            //Arrange
+            var updatedArticlesMock = _fixture.Create<Article>();
+            _serviceMock.Setup(x => x.UpdateArticleAsync(updatedArticlesMock.Id, updatedArticlesMock)).Returns(() => Task.FromResult(updatedArticlesMock));
+            updatedArticlesMock.Id = null;
+
+            //Act
+            var result = await _sut.UpdateLikesScore(updatedArticlesMock.Id, true).ConfigureAwait(false);
+
+            //Assert
+            Assert.NotNull(result);
+            result.Should().NotBeNull();
+            result.Should().BeAssignableTo<BadRequestResult>();
+        }
+
+        [Fact]
+        public async Task UpdateArticleAsyncLikesScore_ShouldReturnNotFound_WhenNoDataFound()
+        {
+            //Arrange
+            var updatedArticlesMock = _fixture.Create<Article>();
+            _serviceMock.Setup(x => x.UpdateArticleAsync(updatedArticlesMock.Id, updatedArticlesMock)).Returns(() => Task.FromResult(updatedArticlesMock));
+
+            //Act
+            var result = await _sut.UpdateLikesScore(updatedArticlesMock.Id, true).ConfigureAwait(false);
+
+            //Assert
+            Assert.NotNull(result);
+            result.Should().NotBeNull();
+            result.Should().BeAssignableTo<NotFoundResult>();
         }
     }
 }
