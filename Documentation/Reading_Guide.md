@@ -9,7 +9,7 @@ This Reading guide contains navigation for the documentation of the back_end rep
         - [Article](https://github.com/Know-Hows/S3-Back-End/blob/Documentation/Documentation/Code/KnowHows%20Back-End/Models/Article.md)
         - [KnowHowsDatabaseSettings](https://github.com/Know-Hows/S3-Back-End/blob/Documentation/Documentation/Code/KnowHows%20Back-End/Models/KnowHowsDatabaseSettings.md)
     - [Services](https://github.com/Know-Hows/S3-Back-End/tree/Documentation/Documentation/Code/KnowHows%20Back-End/Services)
-        - [ArticleService](https://github.com/Know-Hows/S3-Back-End/blob/Documentation/Documentation/Code/KnowHows%20Back-End/Services/ArticleService.md
+        - [ArticleService](https://github.com/Know-Hows/S3-Back-End/blob/Documentation/Documentation/Code/KnowHows%20Back-End/Services/ArticleService.md)
 - [Unit Tests](https://github.com/Know-Hows/S3-Back-End/tree/Documentation/Documentation/Code/KnowHows%20Testing)
     - [Controllers](https://github.com/Know-Hows/S3-Back-End/tree/Documentation/Documentation/Code/KnowHows%20Testing/ControllerTest)
         - [ArticleControllerTests](https://github.com/Know-Hows/S3-Back-End/blob/Documentation/Documentation/Code/KnowHows%20Testing/ControllerTest/ArticleControllerTests.md)
