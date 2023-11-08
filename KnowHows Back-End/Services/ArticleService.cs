@@ -33,4 +33,7 @@ public class ArticleService : IArticleService
 
     public async Task UpdateArticleAsync(string id, Article updatedArticle) =>
             await _articlesCollection.ReplaceOneAsync(x => x.Id == id, updatedArticle);
+
+    public async Task<int?> GetLikeCountAsync(string id) =>
+            await _articlesCollection.Find(x => x.Id == id).Project(x => x.LikesScore).FirstOrDefaultAsync();
 }

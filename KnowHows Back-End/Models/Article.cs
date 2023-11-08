@@ -9,6 +9,6 @@ namespace KnowHows_Back_End.Models
         public string? Id { get; set; }
         public string Title { get; set; } = null!;
         public string Body { get; set; } = null!;
-        public int LikesScore { get; set; } = 0;
+        public int LikesScore { get; set; }
     }
 }
