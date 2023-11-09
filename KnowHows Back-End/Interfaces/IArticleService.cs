@@ -11,5 +11,7 @@ namespace KnowHows_Back_End.Interfaces
         public Task CreateArticleAsync(Article newPost);
 
         Task UpdateArticleAsync(string id, Article updateArticle);
+
+        Task<int?> GetLikeCountAsync(string id);
     }
 }

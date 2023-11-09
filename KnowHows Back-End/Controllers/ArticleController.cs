@@ -36,8 +36,9 @@ public class ArticleController : ControllerBase
     }
 
     [HttpPut("updateLikes/{id:length(24)}")]
-    public async Task<ActionResult> UpdateLikesScore(string id, bool likeCredit)
+    public async Task<ActionResult> UpdateLikesScore(string id, Boolean likeCredit)
     {
+        Console.WriteLine(likeCredit);
         if (id is null) return BadRequest();
 
         var article = await _iArticleService.GetArticleAsync(id);
@@ -49,5 +50,18 @@ public class ArticleController : ControllerBase
 
         await _iArticleService.UpdateArticleAsync(id, article);
         return Ok();
+    }
+
+    [HttpGet("getLikes/{id:length(24)}")]
+    public async Task<ActionResult> GetLikesScore(string id)
+    {
+        int? articleLikes = await _iArticleService.GetLikeCountAsync(id);
+
+        if (articleLikes == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(articleLikes);
     }
 }
