@@ -13,9 +13,5 @@ To run the Visual studio app, open the correct project and press f5
 
 Dont forget to add the ConnectionString to your user secret.
 
-
-## End-Points
-
-Our services:
-- GET/api/Article
-- POST/api/Article
+## Go to Reading guide
+[click here](https://github.com/Know-Hows/S3-Back-End/Documentation/Reading_Guide.md)
