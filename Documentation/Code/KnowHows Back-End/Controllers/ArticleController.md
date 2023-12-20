@@ -1,3 +1,5 @@
+# Article Controller
+
 The ArticleController contains the endpoints where de CRUD actions can be activated for the Articles.
 
 The standard HTTP localhost URL is: http://localhost:5201/
@@ -11,5 +13,6 @@ The endpoints are:
 | {GET}/api/Article | Get all Articles |
 | {POST}/api/Article | Create a new Article with the given data |
 | {PUT}/api/Article/updateLikes/id | Update the LikesScore for the specified Article |
+| {GET}/getLikes/id | Get the LikesScore from a specific Article |
 
 When a endpoint is being called on, it will trigger to act and do the action it was said to do.

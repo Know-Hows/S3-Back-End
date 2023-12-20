@@ -1,3 +1,5 @@
+# Article Service
+
 The ArticleService contains the methods to connect to the database, this uses the connection string, database name, and collection name to use the database to  request GET, POST, PUT, DELETE commands.
 
 When a new specific action with the database needs to be added, it needs to be added here. The ArticleService has an interface it uses called IArticleService, this is used to make use of Dependency Injection. So when the ArticleService is modified, the IArticleService also needs to be modified to accompany the changes.
