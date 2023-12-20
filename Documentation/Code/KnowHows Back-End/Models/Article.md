@@ -1,3 +1,5 @@
+# Article
+
 The Article model contains the variables that will contain the information of the Article. The Id for each individual Article is automatically made by MongoDB and assigned to the article.
 
 Article contains:
